@@ -2,6 +2,9 @@ import {
   ElementRef,
 } from '@angular/core';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const Event = win['Event'];
+
 /** TODO: internal */
 export enum ForegroundRippleState {
   NEW,

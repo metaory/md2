@@ -1,3 +1,8 @@
+var win = typeof window !== 'undefined' && window || <any>{};
+export const MouseEvent = win['MouseEvent'];
+export const KeyboardEvent = win['KeyboardEvent'];
+export const Event = win['Event'];
+
 export * from './core';
 export * from './module';
 

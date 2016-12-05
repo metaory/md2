@@ -6,6 +6,9 @@ import {
 } from '@angular/core';
 import { Md2Accordion } from './accordionpanel';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const Event = win['Event'];
+
 @Directive({ selector: 'md2-accordion-header' })
 export class Md2AccordionHeader { }
 

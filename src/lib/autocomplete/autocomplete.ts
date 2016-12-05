@@ -26,6 +26,11 @@ import {
   TAB
 } from '../core/core';
 
+
+var win = typeof window !== 'undefined' && window || <any>{};
+export const KeyboardEvent = win['KeyboardEvent'];
+export const Event = win['Event'];
+
 class Item {
   public text: string;
   public value: string;

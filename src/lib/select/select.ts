@@ -28,6 +28,9 @@ import {
   KeyCodes
 } from '../core/core';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const Event = win['Event'];
+
 let _uniqueIdCounter = 0;
 
 export type Md2SelectDispatcherListener = (id: string, name: string) => void;

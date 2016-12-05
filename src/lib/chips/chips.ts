@@ -23,6 +23,10 @@ import { CommonModule } from '@angular/common';
 import { Md2AutocompleteModule } from '../autocomplete/autocomplete';
 import { KeyCodes } from '../core/core';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const KeyboardEvent = win['KeyboardEvent'];
+export const Event = win['Event'];
+
 const noop = () => { };
 
 class Chip {

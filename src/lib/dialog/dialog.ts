@@ -22,6 +22,9 @@ import {
 } from '../core/core';
 import { Animate } from './animate';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const KeyboardEvent = win['KeyboardEvent'];
+
 @Directive({ selector: '[md2DialogPortal]' })
 export class Md2DialogPortal extends TemplatePortal {
   constructor(templateRef: TemplateRef<any>, viewContainerRef: ViewContainerRef) {

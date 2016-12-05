@@ -3,6 +3,9 @@ import {UP_ARROW, DOWN_ARROW, TAB, HOME, END} from '../core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const KeyboardEvent = win['KeyboardEvent'];
+
 /**
  * This is the interface for focusable items (used by the ListKeyManager).
  * Each item must know how to focus itself and whether or not it is currently disabled.

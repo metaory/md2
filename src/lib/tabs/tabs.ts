@@ -16,6 +16,9 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const Event = win['Event'];
+
 export class Md2TabChangeEvent {
   index: number;
   tab: Md2Tab;

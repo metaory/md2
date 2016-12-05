@@ -22,6 +22,9 @@ import {
 
 export type TooltipPosition = 'before' | 'after' | 'above' | 'below';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const Event = win['Event'];
+
 @Directive({
   selector: '[tooltip]'
 })
@@ -103,6 +106,9 @@ export class Md2Tooltip {
   encapsulation: ViewEncapsulation.None
 })
 export class Md2TooltipComponent implements AfterViewInit {
+  // public _isVisible: boolean;
+  // public top: string = '-1000px';
+  // public left: string = '-1000px';
   _isVisible: boolean;
   _top: string = '-1000px';
   _left: string = '-1000px';

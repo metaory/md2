@@ -6,6 +6,11 @@
  * real mousedowns will indicate the mouse button that was pressed (e.g. "1" for
  * the left mouse button), faked mousedowns will usually set the property value to 0.
  */
+
+var win = typeof window !== 'undefined' && window || <any>{};
+export const MouseEvent = win['MouseEvent'];
+export const KeyboardEvent = win['KeyboardEvent'];
+
 export function isFakeMousedownFromScreenReader(event: MouseEvent): boolean {
   return event.buttons === 0;
 }

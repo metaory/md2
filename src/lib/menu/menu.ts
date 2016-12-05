@@ -17,6 +17,10 @@ export { Md2MenuItem } from './menu-item';
 export { Md2MenuTrigger } from './menu-trigger';
 
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const MouseEvent = win['MouseEvent'];
+
+
 @Component({
   moduleId: module.id,
   selector: '[md2-menu]',

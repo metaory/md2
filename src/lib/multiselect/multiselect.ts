@@ -22,6 +22,11 @@ import {
   KeyCodes
 } from '../core/core';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const MouseEvent = win['MouseEvent'];
+export const KeyboardEvent = win['KeyboardEvent'];
+export const Event = win['Event'];
+
 class Option {
   public text: string;
   public value: string;

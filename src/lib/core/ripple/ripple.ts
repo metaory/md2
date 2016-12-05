@@ -17,6 +17,10 @@ import {
 } from './ripple-renderer';
 
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const MouseEvent = win['MouseEvent'];
+export const Event = win['Event'];
+
 @Directive({
   selector: '[md-ripple]',
 })

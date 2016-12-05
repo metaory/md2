@@ -23,6 +23,10 @@ import {
 } from '../core/core';
 import { Md2AutocompleteModule } from '../autocomplete/autocomplete';
 
+var win = typeof window !== 'undefined' && window || <any>{};
+export const KeyboardEvent = win['KeyboardEvent'];
+export const Event = win['Event'];
+
 const noop = () => { };
 
 let nextId = 0;

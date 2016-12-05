@@ -51,6 +51,22 @@ export interface IWeek {
 
 const noop = () => { };
 
+// import { global } from '@angular/core/src/facade/lang';
+// const MouseEvent = (global as any).MouseEvent as MouseEvent;
+
+var win = typeof window !== 'undefined' && window || <any>{};
+export const MouseEvent = win['MouseEvent'];
+export const KeyboardEvent = win['KeyboardEvent'];
+export const Event = win['Event']
+
+// export const Event = win['Event'];
+// export const EventTarget = win['EventTarget'];
+// export const History = win['History'];
+// export const Location = win['Location'];
+// export const EventListener = win['EventListener'];
+
+
+
 let nextId = 0;
 
 export const MD2_DATEPICKER_CONTROL_VALUE_ACCESSOR: any = {
@@ -100,29 +116,29 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   private _onTouchedCallback: () => void = noop;
   private _onChangeCallback: (_: any) => void = noop;
 
-  private isDatepickerVisible: boolean;
-  private isYearsVisible: boolean;
-  private isCalendarVisible: boolean;
-  private isHoursVisible: boolean = true;
+  public isDatepickerVisible: boolean;
+  public isYearsVisible: boolean;
+  public isCalendarVisible: boolean;
+  public isHoursVisible: boolean = true;
 
   private months: Array<string> = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  private days: Array<string> = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  private hours: Array<Object> = [];
-  private minutes: Array<Object> = [];
+  public days: Array<string> = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  public hours: Array<Object> = [];
+  public minutes: Array<Object> = [];
 
   private prevMonth: number = 1;
   private currMonth: number = 2;
   private nextMonth: number = 3;
 
-  private years: Array<number> = [];
-  private dates: Array<Object> = [];
+  public years: Array<number> = [];
+  public dates: Array<Object> = [];
   private today: Date = new Date();
   private _displayDate: Date = null;
   private selectedDate: Date = null;
-  private displayDay: IDay = { year: 0, month: '', date: '', day: '', hour: '', minute: '' };
-  private displayInputDate: string = '';
+  public displayDay: IDay = { year: 0, month: '', date: '', day: '', hour: '', minute: '' };
+  public displayInputDate: string = '';
 
-  private clock: any = {
+  public clock: any = {
     dialRadius: 120,
     outerRadius: 99,
     innerRadius: 66,
@@ -228,7 +244,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   }
 
   @HostListener('click', ['$event'])
-  private _handleClick(event: MouseEvent) {
+  _handleClick(event: MouseEvent) {
     if (this.disabled) {
       event.stopPropagation();
       event.preventDefault();
@@ -237,7 +253,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   }
 
   @HostListener('keydown', ['$event'])
-  private _handleKeydown(event: KeyboardEvent) {
+  _handleKeydown(event: KeyboardEvent) {
     if (this.disabled) { return; }
 
     if (this.isDatepickerVisible) {
@@ -318,7 +334,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   }
 
   @HostListener('blur')
-  private onBlur() {
+  public onBlur() {
     this.isDatepickerVisible = false;
     this.isYearsVisible = false;
     this.isCalendarVisible = this.type !== 'time' ? true : false;
@@ -327,7 +343,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   /**
    * Display Years
    */
-  private _showYear() {
+  public _showYear() {
     this.isYearsVisible = true;
     this.isCalendarVisible = true;
     this._scrollToSelectedYear();
@@ -365,7 +381,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   /**
    * Display Datepicker
    */
-  private showDatepicker() {
+  public showDatepicker() {
     if (this.disabled || this.readonly) { return; }
     this.isDatepickerVisible = true;
     this.selectedDate = this.value || new Date(1, 0, 1);
@@ -378,7 +394,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   /**
    * Display Calendar
    */
-  private _showCalendar() {
+  public _showCalendar() {
     this.isYearsVisible = false;
     this.isCalendarVisible = true;
   }
@@ -386,7 +402,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   /**
    * Toggle Hour visiblity
    */
-  private _toggleHours(value: boolean) {
+  public _toggleHours(value: boolean) {
     this.isYearsVisible = false;
     this.isCalendarVisible = false;
     this.isYearsVisible = false;
@@ -397,7 +413,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
   /**
    * Ok Button Event
    */
-  private _onClickOk() {
+  public _onClickOk() {
     if (this.isYearsVisible) {
       this.generateCalendar();
       this.isYearsVisible = false;
@@ -452,7 +468,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
    * Update Month
    * @param noOfMonths increment number of months
    */
-  private updateMonth(noOfMonths: number) {
+  public updateMonth(noOfMonths: number) {
     this.displayDate = this.dateUtil.incrementMonths(this.displayDate, noOfMonths);
     this.generateCalendar();
   }
@@ -461,7 +477,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
    * Check is Before month enabled or not
    * @return boolean
    */
-  private _isBeforeMonth() {
+  public _isBeforeMonth() {
     return !this._minDate ? true : this._minDate && this.dateUtil.getMonthDistance(this.displayDate, this._minDate) < 0;
   }
 
@@ -469,7 +485,7 @@ export class Md2Datepicker implements AfterContentInit, ControlValueAccessor {
    * Check is After month enabled or not
    * @return boolean
    */
-  private _isAfterMonth() {
+  public _isAfterMonth() {
     return !this._maxDate ? true : this._maxDate && this.dateUtil.getMonthDistance(this.displayDate, this._maxDate) > 0;
   }
 
